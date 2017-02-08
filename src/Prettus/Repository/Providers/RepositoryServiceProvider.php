@@ -5,6 +5,7 @@ use Illuminate\Support\ServiceProvider;
 
 /**
  * Class RepositoryServiceProvider
+ *
  * @package Prettus\Repository\Providers
  */
 class RepositoryServiceProvider extends ServiceProvider
@@ -17,22 +18,22 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     protected $defer = false;
 
-
     /**
      *
      * @return void
      */
     public function boot()
     {
-        $this->publishes([
-            __DIR__ . '/../../../resources/config/repository.php' => config_path('repository.php')
-        ]);
+        $this->publishes(
+            [
+                __DIR__ . '/../../../resources/config/repository.php' => config_path('repository.php'),
+            ]
+        );
 
         $this->mergeConfigFrom(__DIR__ . '/../../../resources/config/repository.php', 'repository');
 
         $this->loadTranslationsFrom(__DIR__ . '/../../../resources/lang', 'repository');
     }
-
 
     /**
      * Register the service provider.
@@ -51,7 +52,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->commands('Prettus\Repository\Generators\Commands\CriteriaCommand');
         $this->app->register('Prettus\Repository\Providers\EventServiceProvider');
     }
-
 
     /**
      * Get the services provided by the provider.

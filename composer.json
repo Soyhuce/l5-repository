@@ -46,8 +46,11 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-develop": "2.6.7-dev"
+      "dev-develop": "2.7.0-dev"
     }
   },
-  "minimum-stability": "stable"
+  "minimum-stability": "stable",
+  "require-dev": {
+    "league/fractal": "^0.15.0"
+  }
 }

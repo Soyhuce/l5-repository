@@ -2,14 +2,18 @@
 namespace Prettus\Repository\Events;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Queue\SerializesModels;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
 /**
  * Class RepositoryEventBase
+ *
  * @package Prettus\Repository\Events
  */
 abstract class RepositoryEventBase
 {
+    use SerializesModels;
+
     /**
      * @var Model
      */
@@ -27,7 +31,7 @@ abstract class RepositoryEventBase
 
     /**
      * @param RepositoryInterface $repository
-     * @param Model               $model
+     * @param Model $model
      */
     public function __construct(RepositoryInterface $repository, Model $model)
     {

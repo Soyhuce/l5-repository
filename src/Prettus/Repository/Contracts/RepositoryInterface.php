@@ -3,6 +3,7 @@ namespace Prettus\Repository\Contracts;
 
 /**
  * Interface RepositoryInterface
+ *
  * @package Prettus\Repository\Contracts
  */
 interface RepositoryInterface
@@ -11,12 +12,23 @@ interface RepositoryInterface
     /**
      * Retrieve data array for populate field select
      *
-     * @param string      $column
+     * @param string $column
+     * @param string|null $key
+     *
+     * @return \Illuminate\Support\Collection|array
+     * @deprecated since version laravel 5.2. Use the "pluck" method directly.
+     */
+    public function lists($column, $key = null);
+
+    /**
+     * Retrieve data array for populate field select
+     *
+     * @param string $column
      * @param string|null $key
      *
      * @return \Illuminate\Support\Collection|array
      */
-    public function lists($column, $key = null);
+    public function pluck($column, $key = null);
 
     /**
      * Retrieve all data of repository
@@ -28,9 +40,27 @@ interface RepositoryInterface
     public function all($columns = ['*']);
 
     /**
+     * Retrieve first data of repository
+     *
+     * @param array $columns
+     *
+     * @return mixed
+     */
+    public function first($columns = ['*']);
+
+    /**
+     * Retrieve first data of repository or throw a ModelNotFoundException
+     *
+     * @param array $columns
+     *
+     * @return mixed
+     */
+    public function firstOrFail($columns = ['*']);
+
+    /**
      * Retrieve all data of repository, paginated
      *
-     * @param null  $limit
+     * @param null $limit
      * @param array $columns
      *
      * @return mixed
@@ -40,7 +70,7 @@ interface RepositoryInterface
     /**
      * Retrieve all data of repository, simple paginated
      *
-     * @param null  $limit
+     * @param null $limit
      * @param array $columns
      *
      * @return mixed
@@ -101,6 +131,17 @@ interface RepositoryInterface
     public function findWhereNotIn($field, array $values, $columns = ['*']);
 
     /**
+     * Find data by field between values
+     *
+     * @param       $field
+     * @param array $values
+     * @param array $columns
+     *
+     * @return mixed
+     */
+    public function findWhereBetween($field, array $values, $columns = ['*']);
+
+    /**
      * Save a new entity in repository
      *
      * @param array $attributes
@@ -148,7 +189,7 @@ interface RepositoryInterface
      * @return int
      */
     public function deleteWhere(array $where);
-    
+
     /**
      * Order collection by a given column
      *
@@ -167,6 +208,14 @@ interface RepositoryInterface
      * @return $this
      */
     public function with($relations);
+
+    /**
+     * Add subselect queries to count the relations.
+     *
+     * @param  mixed $relations
+     * @return $this
+     */
+    public function withCount($relations);
 
     /**
      * Set hidden fields

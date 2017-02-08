@@ -33,7 +33,6 @@ class PresenterCommand extends Command
      */
     protected $type = 'Presenter';
 
-
     /**
      * Execute the command.
      *
@@ -43,20 +42,24 @@ class PresenterCommand extends Command
     {
 
         try {
-            (new PresenterGenerator([
-                'name'  => $this->argument('name'),
-                'force' => $this->option('force'),
-            ]))->run();
+            (new PresenterGenerator(
+                [
+                    'name' => $this->argument('name'),
+                    'force' => $this->option('force'),
+                ]
+            ))->run();
             $this->info("Presenter created successfully.");
 
             $filesystem = new Filesystem();
 
             if (!$filesystem->exists(app()->path() . '/Transformers/' . $this->argument('name') . 'Transformer.php')) {
                 if ($this->confirm('Would you like to create a Transformer? [y|N]')) {
-                    (new TransformerGenerator([
-                        'name'  => $this->argument('name'),
-                        'force' => $this->option('force'),
-                    ]))->run();
+                    (new TransformerGenerator(
+                        [
+                            'name' => $this->argument('name'),
+                            'force' => $this->option('force'),
+                        ]
+                    ))->run();
                     $this->info("Transformer created successfully.");
                 }
             }
@@ -66,7 +69,6 @@ class PresenterCommand extends Command
             return false;
         }
     }
-
 
     /**
      * The array of command arguments.
@@ -80,11 +82,10 @@ class PresenterCommand extends Command
                 'name',
                 InputArgument::REQUIRED,
                 'The name of model for which the presenter is being generated.',
-                null
+                null,
             ],
         ];
     }
-
 
     /**
      * The array of command options.
@@ -99,8 +100,8 @@ class PresenterCommand extends Command
                 'f',
                 InputOption::VALUE_NONE,
                 'Force the creation if file already exists.',
-                null
-            ]
+                null,
+            ],
         ];
     }
 }

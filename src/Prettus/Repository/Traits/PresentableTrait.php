@@ -7,6 +7,7 @@ use Prettus\Repository\Contracts\PresenterInterface;
 
 /**
  * Class PresentableTrait
+ *
  * @package Prettus\Repository\Traits
  */
 trait PresentableTrait
@@ -49,7 +50,7 @@ trait PresentableTrait
     /**
      * @return bool
      */
-    protected function hasPresenter()
+    public function hasPresenter()
     {
         return isset($this->presenter) && $this->presenter instanceof PresenterInterface;
     }

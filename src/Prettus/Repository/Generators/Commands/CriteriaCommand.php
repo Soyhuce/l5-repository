@@ -30,6 +30,7 @@ class CriteriaCommand extends Command
      * @var string
      */
     protected $type = 'Criteria';
+
     /**
      * Execute the command.
      *
@@ -38,10 +39,12 @@ class CriteriaCommand extends Command
     public function fire()
     {
         try {
-            (new CriteriaGenerator([
-                'name' => $this->argument('name'),
-                'force' => $this->option('force'),
-            ]))->run();
+            (new CriteriaGenerator(
+                [
+                    'name' => $this->argument('name'),
+                    'force' => $this->option('force'),
+                ]
+            ))->run();
 
             $this->info("Criteria created successfully.");
         } catch (FileAlreadyExistsException $ex) {
@@ -62,7 +65,7 @@ class CriteriaCommand extends Command
                 'name',
                 InputArgument::REQUIRED,
                 'The name of class being generated.',
-                null
+                null,
             ],
         ];
     }
@@ -80,7 +83,7 @@ class CriteriaCommand extends Command
                 'f',
                 InputOption::VALUE_NONE,
                 'Force the creation if file already exists.',
-                null
+                null,
             ],
         ];
     }

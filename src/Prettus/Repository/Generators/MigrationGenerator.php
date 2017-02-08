@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 
 /**
  * Class MigrationGenerator
+ *
  * @package Prettus\Repository\Generators
  */
 class MigrationGenerator extends Generator
@@ -20,7 +21,6 @@ class MigrationGenerator extends Generator
      */
     protected $stub = 'migration/plain';
 
-
     /**
      * Get base path of destination file.
      *
@@ -30,7 +30,6 @@ class MigrationGenerator extends Generator
     {
         return app()->basePath() . '/database/migrations/';
     }
-
 
     /**
      * Get destination path for generated file.
@@ -42,7 +41,6 @@ class MigrationGenerator extends Generator
         return $this->getBasePath() . $this->getFileName() . '.php';
     }
 
-
     /**
      * Get generator path config node.
      *
@@ -52,7 +50,6 @@ class MigrationGenerator extends Generator
     {
         return '';
     }
-
 
     /**
      * Get root namespace.
@@ -64,7 +61,6 @@ class MigrationGenerator extends Generator
         return '';
     }
 
-
     /**
      * Get migration name.
      *
@@ -74,7 +70,6 @@ class MigrationGenerator extends Generator
     {
         return strtolower($this->name);
     }
-
 
     /**
      * Get file name.
@@ -86,7 +81,6 @@ class MigrationGenerator extends Generator
         return date('Y_m_d_His_') . $this->getMigrationName();
     }
 
-
     /**
      * Get schema parser.
      *
@@ -97,7 +91,6 @@ class MigrationGenerator extends Generator
         return new SchemaParser($this->fields);
     }
 
-
     /**
      * Get name parser.
      *
@@ -107,7 +100,6 @@ class MigrationGenerator extends Generator
     {
         return new NameParser($this->name);
     }
-
 
     /**
      * Get stub templates.
@@ -126,9 +118,9 @@ class MigrationGenerator extends Generator
             case 'insert':
                 $file = 'change';
                 $replacements = [
-                    'class'       => $this->getClass(),
-                    'table'       => $parser->getTable(),
-                    'fields_up'   => $this->getSchemaParser()->up(),
+                    'class' => $this->getClass(),
+                    'table' => $parser->getTable(),
+                    'fields_up' => $this->getSchemaParser()->up(),
                     'fields_down' => $this->getSchemaParser()->down(),
                 ];
                 break;
@@ -138,17 +130,17 @@ class MigrationGenerator extends Generator
             case 'alter':
                 $file = 'change';
                 $replacements = [
-                    'class'       => $this->getClass(),
-                    'table'       => $parser->getTable(),
+                    'class' => $this->getClass(),
+                    'table' => $parser->getTable(),
                     'fields_down' => $this->getSchemaParser()->up(),
-                    'fields_up'   => $this->getSchemaParser()->down(),
+                    'fields_up' => $this->getSchemaParser()->down(),
                 ];
                 break;
             default:
                 $file = 'create';
                 $replacements = [
-                    'class'  => $this->getClass(),
-                    'table'  => $parser->getTable(),
+                    'class' => $this->getClass(),
+                    'table' => $parser->getTable(),
                     'fields' => $this->getSchemaParser()->up(),
                 ];
                 break;

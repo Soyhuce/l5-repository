@@ -5,6 +5,7 @@ use Illuminate\Contracts\Support\Arrayable;
 
 /**
  * Class SchemaParser
+ *
  * @package Prettus\Repository\Generators\Migrations
  */
 class SchemaParser implements Arrayable
@@ -16,7 +17,7 @@ class SchemaParser implements Arrayable
      */
     protected $customAttributes = [
         'remember_token' => 'rememberToken()',
-        'soft_delete'    => 'softDeletes()',
+        'soft_delete' => 'softDeletes()',
     ];
     /**
      * The migration schema.
@@ -113,9 +114,12 @@ class SchemaParser implements Arrayable
      */
     public function getColumn($schema)
     {
-        return array_first(explode(':', $schema), function ($key, $value) {
-            return $value;
-        });
+        return array_first(
+            explode(':', $schema),
+            function ($value) {
+                return $value;
+            }
+        );
     }
 
     /**
@@ -161,7 +165,7 @@ class SchemaParser implements Arrayable
      * Create field.
      *
      * @param  string $column
-     * @param  array  $attributes
+     * @param  array $attributes
      *
      * @return string
      */
@@ -193,7 +197,7 @@ class SchemaParser implements Arrayable
     /**
      * Format field to script.
      *
-     * @param  int    $key
+     * @param  int $key
      * @param  string $field
      * @param  string $column
      *
@@ -217,7 +221,7 @@ class SchemaParser implements Arrayable
     /**
      * Format field to script.
      *
-     * @param  int    $key
+     * @param  int $key
      * @param  string $field
      * @param  string $column
      *
