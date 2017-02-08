@@ -16,8 +16,19 @@ interface RepositoryInterface
      * @param string|null $key
      *
      * @return \Illuminate\Support\Collection|array
+     * @deprecated since version laravel 5.2. Use the "pluck" method directly.
      */
     public function lists($column, $key = null);
+
+    /**
+     * Retrieve data array for populate field select
+     *
+     * @param string $column
+     * @param string|null $key
+     *
+     * @return \Illuminate\Support\Collection|array
+     */
+    public function pluck($column, $key = null);
 
     /**
      * Retrieve all data of repository
@@ -27,6 +38,24 @@ interface RepositoryInterface
      * @return mixed
      */
     public function all($columns = ['*']);
+
+    /**
+     * Retrieve first data of repository
+     *
+     * @param array $columns
+     *
+     * @return mixed
+     */
+    public function first($columns = ['*']);
+
+     /**
+      * Retrieve first data of repository or throw a ModelNotFoundException
+      *
+      * @param array $columns
+      *
+      * @return mixed
+      */
+    public function firstOrFail($columns = ['*']);
 
     /**
      * Retrieve all data of repository, paginated
