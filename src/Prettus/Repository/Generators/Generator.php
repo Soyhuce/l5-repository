@@ -4,6 +4,7 @@ namespace Prettus\Repository\Generators;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
+use RuntimeException;
 
 abstract class Generator
 {
@@ -237,7 +238,7 @@ abstract class Generator
         } else {
             $path = str_replace('/', '\\', $path);
         }
-        
+
 
         return $path;
     }
