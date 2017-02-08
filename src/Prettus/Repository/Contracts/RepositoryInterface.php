@@ -48,13 +48,13 @@ interface RepositoryInterface
      */
     public function first($columns = ['*']);
 
-     /**
-      * Retrieve first data of repository or throw a ModelNotFoundException
-      *
-      * @param array $columns
-      *
-      * @return mixed
-      */
+    /**
+     * Retrieve first data of repository or throw a ModelNotFoundException
+     *
+     * @param array $columns
+     *
+     * @return mixed
+     */
     public function firstOrFail($columns = ['*']);
 
     /**
@@ -208,6 +208,14 @@ interface RepositoryInterface
      * @return $this
      */
     public function with($relations);
+
+    /**
+     * Add subselect queries to count the relations.
+     *
+     * @param  mixed $relations
+     * @return $this
+     */
+    public function withCount($relations);
 
     /**
      * Set hidden fields

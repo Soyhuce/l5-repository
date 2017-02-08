@@ -683,6 +683,19 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
     }
 
     /**
+     * Add subselect queries to count the relations.
+     *
+     * @param  mixed $relations
+     * @return $this
+     */
+    public function withCount($relations)
+    {
+        $this->model = $this->model->withCount($relations);
+
+        return $this;
+    }
+
+    /**
      * Load relation with closure
      *
      * @param string $relation
