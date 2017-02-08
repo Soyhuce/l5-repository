@@ -1,7 +1,6 @@
 <?php
 namespace Prettus\Repository\Eloquent;
 
-use Closure;
 use Exception;
 use Illuminate\Container\Container as Application;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -10,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Prettus\Repository\Contracts\CriteriaInterface;
 use Prettus\Repository\Contracts\Presentable;
-use Prettus\Repository\Contracts\PresentableInterface;
 use Prettus\Repository\Contracts\PresenterInterface;
 use Prettus\Repository\Contracts\RepositoryCriteriaInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;
@@ -23,6 +21,7 @@ use Prettus\Validator\Exceptions\ValidatorException;
 
 /**
  * Class BaseRepository
+ *
  * @package Prettus\Repository\Eloquent
  */
 abstract class BaseRepository implements RepositoryInterface, RepositoryCriteriaInterface
@@ -100,7 +99,6 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
      */
     public function boot()
     {
-
     }
 
     /**
@@ -255,7 +253,7 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
     /**
      * Retrieve data array for populate field select
      *
-     * @param string      $column
+     * @param string $column
      * @param string|null $key
      *
      * @return \Illuminate\Support\Collection|array
@@ -269,7 +267,7 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
     /**
      * Retrieve data array for populate field select
      *
-     * @param string      $column
+     * @param string $column
      * @param string|null $key
      *
      * @return \Illuminate\Support\Collection|array
@@ -277,7 +275,7 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
     public function pluck($column, $key = null)
     {
         $this->applyCriteria();
-        
+
         return $this->model->pluck($column, $key);
     }
 
@@ -305,7 +303,6 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
         return $this->parserResult($results);
     }
 
-
     /**
      * Retrieve first data of repository
      *
@@ -328,8 +325,8 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
     /**
      * Retrieve all data of repository, paginated
      *
-     * @param null   $limit
-     * @param array  $columns
+     * @param null $limit
+     * @param array $columns
      * @param string $pageName
      * @param string $method
      *
@@ -350,7 +347,7 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
     /**
      * Retrieve all data of repository, simple paginated
      *
-     * @param null  $limit
+     * @param null $limit
      * @param array $columns
      *
      * @return mixed
@@ -470,9 +467,9 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
             // to make sure data type are same because validator may need to use
             // this data to compare with data that fetch from database.
             $attributes = $this->model->newInstance()
-                ->forceFill($attributes)
-                ->makeVisible($this->model->getHidden())
-                ->toArray();
+                                      ->forceFill($attributes)
+                                      ->makeVisible($this->model->getHidden())
+                                      ->toArray();
 
             $this->validator->with($attributes)->passesOrFail(ValidatorInterface::RULE_CREATE);
         }
@@ -505,9 +502,9 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
             // to make sure data type are same because validator may need to use
             // this data to compare with data that fetch from database.
             $attributes = $this->model->newInstance()
-                ->forceFill($attributes)
-                ->makeVisible($this->model->getHidden())
-                ->toArray();
+                                      ->forceFill($attributes)
+                                      ->makeVisible($this->model->getHidden())
+                                      ->toArray();
 
             $this->validator->with($attributes)->setId($id)->passesOrFail(ValidatorInterface::RULE_UPDATE);
         }
@@ -721,17 +718,19 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
      */
     public function popCriteria($criteria)
     {
-        $this->criteria = $this->criteria->reject(function ($item) use ($criteria) {
-            if (is_object($item) && is_string($criteria)) {
-                return get_class($item) === $criteria;
-            }
+        $this->criteria = $this->criteria->reject(
+            function ($item) use ($criteria) {
+                if (is_object($item) && is_string($criteria)) {
+                    return get_class($item) === $criteria;
+                }
 
-            if (is_string($item) && is_object($criteria)) {
-                return $item === get_class($criteria);
-            }
+                if (is_string($item) && is_object($criteria)) {
+                    return $item === get_class($criteria);
+                }
 
-            return get_class($item) === get_class($criteria);
-        });
+                return get_class($item) === get_class($criteria);
+            }
+        );
 
         return $this;
     }
@@ -884,13 +883,15 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
         if ($this->presenter instanceof PresenterInterface) {
 
             if ($result instanceof Collection || $result instanceof LengthAwarePaginator) {
-                $result->each(function ($model) {
-                    if ($model instanceof Presentable) {
-                        $model->setPresenter($this->presenter);
-                    }
+                $result->each(
+                    function ($model) {
+                        if ($model instanceof Presentable) {
+                            $model->setPresenter($this->presenter);
+                        }
 
-                    return $model;
-                });
+                        return $model;
+                    }
+                );
             } elseif ($result instanceof Presentable) {
                 $result = $result->setPresenter($this->presenter);
             }
