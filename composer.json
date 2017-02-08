@@ -1,20 +1,26 @@
 {
-  "name": "prettus/l5-repository",
+  "name": "soyhuce/l5-repository",
   "description": "Laravel 5 - Repositories to  the database layer",
-  "keywords": ["laravel", "repository", "eloquent", "model", "cache"],
+  "keywords": [
+    "laravel",
+    "repository",
+    "eloquent",
+    "model",
+    "cache"
+  ],
   "license": "MIT",
   "authors": [
     {
-      "name": "Anderson Andrade",
-      "email": "contato@andersonandra.de",
+      "name": "Bastien Philippe",
+      "email": "bastien.philippe@soyhuce.fr",
       "role": "Developer"
     }
   ],
   "support": {
-    "email": "contato@andersonandra.de",
-    "issues":"https://github.com/andersao/l5-repository/issues",
-    "wiki":"https://github.com/andersao/l5-repository",
-    "source":"https://github.com/andersao/l5-repository"
+    "email": "bastien.philippe@soyhuce.fr",
+    "issues": "https://github.com/soyhuce/l5-repository/issues",
+    "wiki": "https://github.com/soyhuce/l5-repository",
+    "source": "https://github.com/soyhuce/l5-repository"
   },
   "require": {
     "illuminate/http": "~5.0",

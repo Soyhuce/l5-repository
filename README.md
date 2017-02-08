@@ -2,11 +2,16 @@
 
 Laravel 5 Repositories is used to abstract the data layer, making our application more flexible to maintain.
 
-[![Latest Stable Version](https://poser.pugx.org/prettus/l5-repository/v/stable)](https://packagist.org/packages/prettus/l5-repository) [![Total Downloads](https://poser.pugx.org/prettus/l5-repository/downloads)](https://packagist.org/packages/prettus/l5-repository) [![Latest Unstable Version](https://poser.pugx.org/prettus/l5-repository/v/unstable)](https://packagist.org/packages/prettus/l5-repository) [![License](https://poser.pugx.org/prettus/l5-repository/license)](https://packagist.org/packages/prettus/l5-repository)
-[![Analytics](https://ga-beacon.appspot.com/UA-61050740-1/l5-repository/readme)](https://packagist.org/packages/prettus/l5-repository)
-[![Code Climate](https://codeclimate.com/github/andersao/l5-repository/badges/gpa.svg)](https://codeclimate.com/github/andersao/l5-repository)
+**This forks aims to merge useful pull requests from original repository [andersao/l5-repository](https://github.com/andersao/l5-repository) which appears to 
+be abandoned (last release june 2016).**
 
-#### See versions: [1.0.*](https://github.com/andersao/l5-repository/tree/1.0.4) / [2.0.*](https://github.com/andersao/l5-repository/tree/2.0.14)
+[![Latest Stable Version](https://poser.pugx.org/soyhuce/l5-repository/v/stable)](https://packagist.org/packages/soyhuce/l5-repository) 
+[![Total Downloads](https://poser.pugx.org/soyhuce/l5-repository/downloads)](https://packagist.org/packages/soyhuce/l5-repository)
+[![Latest Unstable Version](https://poser.pugx.org/soyhuce/l5-repository/v/unstable)](https://packagist.org/soyhuce/prettus/l5-repository)
+[![License](https://poser.pugx.org/soyhuce/l5-repository/license)](https://packagist.org/packages/soyhuce/l5-repository)
+[![Code Climate](https://codeclimate.com/github/Soyhuce/l5-repository/badges/gpa.svg)](https://codeclimate.com/github/Soyhuce/l5-repository)
+
+#### See versions: [1.0.*](https://github.com/Soyhuce/l5-repository/tree/1.0.4) / [2.0.*](https://github.com/Soyhuce/l5-repository/tree/2.0.14)
 #### Migrate to: [2.0](migration-to-2.0.md) / [2.1](migration-to-2.1.md)
 
 You want to know a little more about the Repository pattern? [Read this great article](http://bit.ly/1IdmRNS).
@@ -51,7 +56,7 @@ You want to know a little more about the Repository pattern? [Read this great ar
 Execute the following command to get the latest version of the package:
 
 ```terminal
-composer require prettus/l5-repository
+composer require soyhuce/l5-repository
 ```
 
 ### Laravel
