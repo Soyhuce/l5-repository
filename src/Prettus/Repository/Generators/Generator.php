@@ -2,14 +2,12 @@
 
 namespace Prettus\Repository\Generators;
 
-use Illuminate\Console\AppNamespaceDetectorTrait;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
+use RuntimeException;
 
 abstract class Generator
 {
-
-    use AppNamespaceDetectorTrait;
 
     /**
      * The filesystem instance.
@@ -110,7 +108,7 @@ abstract class Generator
      */
     public function getBasePath()
     {
-        return base_path();
+        return app()->basePath();
     }
 
 
@@ -176,6 +174,23 @@ abstract class Generator
         return config('repository.generator.rootNamespace', $this->getAppNamespace());
     }
 
+    /**
+     * @return int|string
+     * @throws RuntimeException
+     */
+    public function getAppNamespace()
+    {
+        $composer = json_decode(file_get_contents(base_path('composer.json')), true);
+        foreach ((array) data_get($composer, 'autoload.psr-4') as $namespace => $path) {
+            foreach ((array) $path as $pathChoice) {
+                if (realpath(app()->path()) == realpath(app()->basePath().'/'.$pathChoice)) {
+                    return $namespace;
+                }
+            }
+        }
+        throw new RuntimeException('Unable to detect application namespace.');
+    }
+
 
     /**
      * Get class-specific output paths.
@@ -223,12 +238,15 @@ abstract class Generator
         } else {
             $path = str_replace('/', '\\', $path);
         }
-        
+
 
         return $path;
     }
 
 
+    /**
+     * @return mixed
+     */
     abstract public function getPathConfigNode();
 
 
