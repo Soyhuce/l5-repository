@@ -110,7 +110,6 @@ interface RepositoryInterface
      *
      * @return mixed
      */
-
     public function findWhereBetween($field, array $values, $columns = ['*']);
 
     /**

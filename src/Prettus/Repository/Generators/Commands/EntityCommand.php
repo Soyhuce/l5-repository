@@ -28,7 +28,6 @@ class EntityCommand extends Command
      */
     protected $generators = null;
 
-
     /**
      * Execute the command.
      *
@@ -38,10 +37,13 @@ class EntityCommand extends Command
     {
 
         if ($this->confirm('Would you like to create a Presenter? [y|N]')) {
-            $this->call('make:presenter', [
-                'name'    => $this->argument('name'),
-                '--force' => $this->option('force'),
-            ]);
+            $this->call(
+                'make:presenter',
+                [
+                    'name' => $this->argument('name'),
+                    '--force' => $this->option('force'),
+                ]
+            );
         }
 
         $validator = $this->option('validator');
@@ -50,36 +52,47 @@ class EntityCommand extends Command
         }
 
         if ($validator == 'yes') {
-            $this->call('make:validator', [
-                'name'    => $this->argument('name'),
-                '--rules' => $this->option('rules'),
-                '--force' => $this->option('force'),
-            ]);
+            $this->call(
+                'make:validator',
+                [
+                    'name' => $this->argument('name'),
+                    '--rules' => $this->option('rules'),
+                    '--force' => $this->option('force'),
+                ]
+            );
         }
 
         if ($this->confirm('Would you like to create a Controller? [y|N]')) {
 
             // Generate a controller resource
-            $this->call('make:resource', [
-                'name'    => $this->argument('name'),
-                '--force' => $this->option('force')
-            ]);
+            $this->call(
+                'make:resource',
+                [
+                    'name' => $this->argument('name'),
+                    '--force' => $this->option('force'),
+                ]
+            );
         }
 
-        $this->call('make:repository', [
-            'name'        => $this->argument('name'),
-            '--fillable'  => $this->option('fillable'),
-            '--rules'     => $this->option('rules'),
-            '--validator' => $validator,
-            '--force'     => $this->option('force')
-        ]);
+        $this->call(
+            'make:repository',
+            [
+                'name' => $this->argument('name'),
+                '--fillable' => $this->option('fillable'),
+                '--rules' => $this->option('rules'),
+                '--validator' => $validator,
+                '--force' => $this->option('force'),
+            ]
+        );
 
-        $this->call('make:bindings', [
-            'name'    => $this->argument('name'),
-            '--force' => $this->option('force')
-        ]);
+        $this->call(
+            'make:bindings',
+            [
+                'name' => $this->argument('name'),
+                '--force' => $this->option('force'),
+            ]
+        );
     }
-
 
     /**
      * The array of command arguments.
@@ -93,11 +106,10 @@ class EntityCommand extends Command
                 'name',
                 InputArgument::REQUIRED,
                 'The name of class being generated.',
-                null
+                null,
             ],
         ];
     }
-
 
     /**
      * The array of command options.
@@ -112,29 +124,29 @@ class EntityCommand extends Command
                 null,
                 InputOption::VALUE_OPTIONAL,
                 'The fillable attributes.',
-                null
+                null,
             ],
             [
                 'rules',
                 null,
                 InputOption::VALUE_OPTIONAL,
                 'The rules of validation attributes.',
-                null
+                null,
             ],
             [
                 'validator',
                 null,
                 InputOption::VALUE_OPTIONAL,
                 'Adds validator reference to the repository.',
-                null
+                null,
             ],
             [
                 'force',
                 'f',
                 InputOption::VALUE_NONE,
                 'Force the creation if file already exists.',
-                null
-            ]
+                null,
+            ],
         ];
     }
 }

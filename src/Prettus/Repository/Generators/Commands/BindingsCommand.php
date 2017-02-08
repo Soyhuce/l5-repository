@@ -3,7 +3,6 @@ namespace Prettus\Repository\Generators\Commands;
 
 use File;
 use Illuminate\Console\Command;
-use Illuminate\Support\Collection;
 use Prettus\Repository\Generators\BindingsGenerator;
 use Prettus\Repository\Generators\FileAlreadyExistsException;
 use Symfony\Component\Console\Input\InputArgument;
@@ -33,7 +32,6 @@ class BindingsCommand extends Command
      */
     protected $type = 'Bindings';
 
-
     /**
      * Execute the command.
      *
@@ -42,21 +40,32 @@ class BindingsCommand extends Command
     public function fire()
     {
         try {
-            $bindingGenerator = new BindingsGenerator([
-                'name' => $this->argument('name'),
-                'force' => $this->option('force'),
-            ]);
+            $bindingGenerator = new BindingsGenerator(
+                [
+                    'name' => $this->argument('name'),
+                    'force' => $this->option('force'),
+                ]
+            );
             // generate repository service provider
             if (!file_exists($bindingGenerator->getPath())) {
-                $this->call('make:provider', [
-                    'name' => $bindingGenerator->getConfigGeneratorClassPath($bindingGenerator->getPathConfigNode()),
-                ]);
+                $this->call(
+                    'make:provider',
+                    [
+                        'name' => $bindingGenerator->getConfigGeneratorClassPath($bindingGenerator->getPathConfigNode()),
+                    ]
+                );
                 // placeholder to mark the place in file where to prepend repository bindings
                 $provider = File::get($bindingGenerator->getPath());
-                File::put($bindingGenerator->getPath(), vsprintf(str_replace('//', '%s', $provider), [
-                    '//',
-                    $bindingGenerator->bindPlaceholder
-                ]));
+                File::put(
+                    $bindingGenerator->getPath(),
+                    vsprintf(
+                        str_replace('//', '%s', $provider),
+                        [
+                            '//',
+                            $bindingGenerator->bindPlaceholder,
+                        ]
+                    )
+                );
             }
             $bindingGenerator->run();
             $this->info($this->type . ' created successfully.');
@@ -66,7 +75,6 @@ class BindingsCommand extends Command
             return false;
         }
     }
-
 
     /**
      * The array of command arguments.
@@ -80,11 +88,10 @@ class BindingsCommand extends Command
                 'name',
                 InputArgument::REQUIRED,
                 'The name of model for which the controller is being generated.',
-                null
+                null,
             ],
         ];
     }
-
 
     /**
      * The array of command options.
@@ -99,7 +106,7 @@ class BindingsCommand extends Command
                 'f',
                 InputOption::VALUE_NONE,
                 'Force the creation if file already exists.',
-                null
+                null,
             ],
         ];
     }

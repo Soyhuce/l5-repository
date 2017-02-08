@@ -460,7 +460,6 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
      *
      * @return mixed
      */
-
     public function findWhereBetween($field, array $values, $columns = ['*'])
     {
         $this->applyCriteria();

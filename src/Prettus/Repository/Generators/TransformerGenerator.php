@@ -3,6 +3,7 @@ namespace Prettus\Repository\Generators;
 
 /**
  * Class TransformerGenerator
+ *
  * @package Prettus\Repository\Generators
  */
 
@@ -62,17 +63,26 @@ class TransformerGenerator extends Generator
      */
     public function getReplacements()
     {
-        $modelGenerator = new ModelGenerator([
-            'name' => $this->name
-        ]);
+        $modelGenerator = new ModelGenerator(
+            [
+                'name' => $this->name,
+            ]
+        );
         $model = $modelGenerator->getRootNamespace() . '\\' . $modelGenerator->getName();
-        $model = str_replace([
-            "\\",
-            '/'
-        ], '\\', $model);
+        $model = str_replace(
+            [
+                "\\",
+                '/',
+            ],
+            '\\',
+            $model
+        );
 
-        return array_merge(parent::getReplacements(), [
-            'model' => $model
-        ]);
+        return array_merge(
+            parent::getReplacements(),
+            [
+                'model' => $model,
+            ]
+        );
     }
 }

@@ -6,6 +6,7 @@ use Prettus\Repository\Generators\Migrations\SchemaParser;
 
 /**
  * Class ModelGenerator
+ *
  * @package Prettus\Repository\Generators
  */
 class ModelGenerator extends Generator
@@ -66,9 +67,12 @@ class ModelGenerator extends Generator
      */
     public function getReplacements()
     {
-        return array_merge(parent::getReplacements(), [
-            'fillable' => $this->getFillable()
-        ]);
+        return array_merge(
+            parent::getReplacements(),
+            [
+                'fillable' => $this->getFillable(),
+            ]
+        );
     }
 
     /**

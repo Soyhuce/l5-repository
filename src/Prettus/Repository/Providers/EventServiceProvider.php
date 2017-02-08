@@ -13,14 +13,14 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         'Prettus\Repository\Events\RepositoryEntityCreated' => [
-            'Prettus\Repository\Listeners\CleanCacheRepository'
+            'Prettus\Repository\Listeners\CleanCacheRepository',
         ],
         'Prettus\Repository\Events\RepositoryEntityUpdated' => [
-            'Prettus\Repository\Listeners\CleanCacheRepository'
+            'Prettus\Repository\Listeners\CleanCacheRepository',
         ],
         'Prettus\Repository\Events\RepositoryEntityDeleted' => [
-            'Prettus\Repository\Listeners\CleanCacheRepository'
-        ]
+            'Prettus\Repository\Listeners\CleanCacheRepository',
+        ],
     ];
 
     /**
