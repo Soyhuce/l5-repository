@@ -49,5 +49,8 @@
       "dev-develop": "2.6.7-dev"
     }
   },
-  "minimum-stability": "stable"
+  "minimum-stability": "stable",
+  "require-dev": {
+    "league/fractal": "^0.15.0"
+  }
 }
