@@ -3,6 +3,7 @@ namespace Prettus\Repository\Contracts;
 
 /**
  * Interface RepositoryInterface
+ *
  * @package Prettus\Repository\Contracts
  */
 interface RepositoryInterface
@@ -11,7 +12,7 @@ interface RepositoryInterface
     /**
      * Retrieve data array for populate field select
      *
-     * @param string      $column
+     * @param string $column
      * @param string|null $key
      *
      * @return \Illuminate\Support\Collection|array
@@ -30,7 +31,7 @@ interface RepositoryInterface
     /**
      * Retrieve all data of repository, paginated
      *
-     * @param null  $limit
+     * @param null $limit
      * @param array $columns
      *
      * @return mixed
@@ -40,7 +41,7 @@ interface RepositoryInterface
     /**
      * Retrieve all data of repository, simple paginated
      *
-     * @param null  $limit
+     * @param null $limit
      * @param array $columns
      *
      * @return mixed
@@ -101,6 +102,18 @@ interface RepositoryInterface
     public function findWhereNotIn($field, array $values, $columns = ['*']);
 
     /**
+     * Find data by field between values
+     *
+     * @param       $field
+     * @param array $values
+     * @param array $columns
+     *
+     * @return mixed
+     */
+
+    public function findWhereBetween($field, array $values, $columns = ['*']);
+
+    /**
      * Save a new entity in repository
      *
      * @param array $attributes
@@ -148,7 +161,7 @@ interface RepositoryInterface
      * @return int
      */
     public function deleteWhere(array $where);
-    
+
     /**
      * Order collection by a given column
      *
