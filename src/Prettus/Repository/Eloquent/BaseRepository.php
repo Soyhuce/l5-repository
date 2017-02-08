@@ -33,7 +33,7 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
     protected $app;
 
     /**
-     * @var Model
+     * @var Model | \Illuminate\Database\Eloquent\Builder | \Illuminate\Database\Query\Builder
      */
     protected $model;
 
