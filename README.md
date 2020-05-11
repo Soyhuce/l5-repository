@@ -1,5 +1,7 @@
 # Laravel 5 Repositories
 
+** This repository is archived. Please use `andersao/l5-repository` **
+
 Laravel 5 Repositories is used to abstract the data layer, making our application more flexible to maintain.
 
 **This forks aims to merge useful pull requests from original repository [andersao/l5-repository](https://github.com/andersao/l5-repository) which appears to 
